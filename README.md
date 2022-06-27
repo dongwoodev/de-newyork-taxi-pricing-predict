@@ -38,5 +38,5 @@
 
 ## 성능 개선
 - 데이터 클리닝 도중, `total_amount` 와 `trip_distance`등 에서 이상값(Outlier)를 발견 
-    > 해결 : 
+    > 해결 : x
 
