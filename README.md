@@ -52,12 +52,17 @@
 - 지불 방식에 대해서는 Credit Card로 지불하는 사람들이 가장 많으며, 금액에 대한 분쟁도 꽤 일어난다는 것을 알 수 있다.
 
 ## 머신러닝 예측
-|No|r2 score|RMSE|Description|
-|---|---|---|---|
-|1|0.70|7.91|초기 예측 모델|
+|No|r2 score|RMSE|Description|Link|
+|---|---|---|---|---|
+|1|0.70|7.91|초기 예측 모델|[💾]()|
+|2|0.81|6.2|- OneHot Encoding, Standard Scaling, Vector Assembler등 전처리|[💾]()|
 
-- 10마일 정도 가는데 41불 정도로 예측되었고 거리가 길수록 예측 확률도 높아진다는 것을 알 수 있었다.
+- 10마일 정도 가는데 41불 정도로 예측되었고 거리가 길수록 예측 확률도 높아진다는 것을 알 수 있었다. (초기 예측)
+- 전처리 이후, 좋은 성능이 나온 것으로 확인되었다.
 ## 성능 개선
 - 데이터 클리닝 도중, `total_amount` 와 `trip_distance`등 에서 이상값(Outlier)를 발견
     > 해결 : `WHERE` 을 통해 새 쿼리를 만들어 데이터 전처리
 - 초기 예측 성능이 70%(R2)정도 나왔다. 좋은 성능은 아니지만 적당한 결과였다. 
+- `OneHoTEncoding`과 `StandardScaler`, `VectorAssembler`를 통해 numerical Data와 Categorical data를 전처리 한 컬럼을 이용해 예측 성능을 내보았다.
+    > 해결 : 지난 초기 예측 성능 보다 10% 향상된 좋은 성능이 나왔다. (80%)
+
