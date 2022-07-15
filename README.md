@@ -1,9 +1,11 @@
 # 🚕 NewYork Taxi Pricing Predict
 201637011 강동우
 
-# 1. 배경
-## 의사 결정 배경
-과거 기반의 데이터와 실시간 데이터를 기반으로 수요와 공급의 예측을 통해 가격을 조정하려고 한다.
+# 1. Definition
+
+> 과거 기반의 데이터와 실시간 데이터를 기반으로 수요와 공급의 예측을 통해 가격을 조정하려고 한다.
+
+- 대용량 데이터의 아키텍쳐 설계와 파이프라인 구축을 위해 택시 요금을 예측한다.
 
 ## 파일 트리
 ```
@@ -17,11 +19,13 @@
 - Kafka
 
 ## 파이프 라인
-
-- Batch Processing(과거 기반) :  머신러닝 학습
-- Stream Processing(실시간) : 걸리는 시간 예측
-
 <img src="./templates/readme_pipeline.png" width="800">
+
+1. **배치 프로세싱(기존 데이터 기반)**
+    - 오프라인 배치 프로세싱에는 머신러닝 학습을 진행한다.
+2. **스트리밍 프로세싱(실시간)**
+    - 택시 요금, 이동 시간은 실시간으로 예측을 진행한다.
+
 
 ## 실행 계획
 |No.|Title|Decription|Stack|URL|
@@ -32,7 +36,7 @@
 |4|Taxi Pricing Event Processing (택시비 이벤트 처리) |카프카를 이용하여 택시 Producer, Topic을 만들고 메세지 확인할 수 있게 구현|`Kafka`, `Spark`||
 |5|Taxi Pricing (택시정보 받아 택시비 예측) |Flink를 이용하여 택시 정보를 받아 택시비 예측|`Flink`, `Spark`||
 
-# 2. 프로세스 노트
+# 2. Batch Process
 1. TLC 사이트에서 데이터를 수집 후 Spark SQL 쿼리를 통해 데이터 프레임 생성 
 2. Outlier 제거를 위한 데이터 클리닝
 3. 시각화 작업 
@@ -55,7 +59,8 @@
 |No|r2 score|RMSE|Description|Link|
 |---|---|---|---|---|
 |1|0.70|7.91|초기 예측 모델|[💾]()|
-|2|0.81|6.2|- OneHot Encoding, Standard Scaling, Vector Assembler등 전처리|[💾]()|
+|2|0.81|6.2|OneHot Encoding, Standard Scaling, Vector Assembler등 전처리|[💾]()|
+|3|0.81|6.2|Parameter Tuning (elesticNet, Regression)|[💾]()|
 
 - 10마일 정도 가는데 41불 정도로 예측되었고 거리가 길수록 예측 확률도 높아진다는 것을 알 수 있었다. (초기 예측)
 - 전처리 이후, 좋은 성능이 나온 것으로 확인되었다.
@@ -65,4 +70,5 @@
 - 초기 예측 성능이 70%(R2)정도 나왔다. 좋은 성능은 아니지만 적당한 결과였다. 
 - `OneHoTEncoding`과 `StandardScaler`, `VectorAssembler`를 통해 numerical Data와 Categorical data를 전처리 한 컬럼을 이용해 예측 성능을 내보았다.
     > 해결 : 지난 초기 예측 성능 보다 10% 향상된 좋은 성능이 나왔다. (80%)
+    > 해결2 : 파라미터 튜닝을 진행하였지만 차이가 없는 같은 성능이 나왔다.
 
