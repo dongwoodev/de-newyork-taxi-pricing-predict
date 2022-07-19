@@ -9,7 +9,30 @@
 
 ## 파일 트리
 ```
-
+├── README.md
+├── batch
+│   ├── notebook
+│   │   ├── taxi-analysis.ipynb
+│   │   ├── taxi-fare-prediction-hyper-parameter.ipynb
+│   │   ├── taxi-fare-prediction-preprocessing.ipynb
+│   │   └── taxi-fare-prediction.ipynb
+│   └── py
+│       ├── preprocessing.py
+│       ├── train_predict.py
+│       └── tune_hyperparamenter.py
+├── data
+│   ├── model
+│   │   ├── data
+│   ├── taxi+_zone_lookup.csv
+│   ├── test
+│   ├── train
+│   └── trips
+├── stream
+└── templates
+    ├── readme_pipeline.png
+    ├── 날짜별_택시_이용_시각화.png
+    ├── 요일별_택시_이용_시각화.png
+    └── 택시 이용에 따른 지불 방법_시각화.png
 ```
 ## 기술 스택
 - Python 3.8
