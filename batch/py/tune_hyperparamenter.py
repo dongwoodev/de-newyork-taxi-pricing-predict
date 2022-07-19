@@ -8,7 +8,6 @@ import numpy as np
 import pandas as pd
 
 MAX_MEMORY = '5g'
-MAX_MEMORY = '5g'
 spark = SparkSession.builder.appName('taxi-fare-prediction')\
                 .config('spark.executor.memory', MAX_MEMORY)\
                 .config('spark.driver.memory', MAX_MEMORY)\
@@ -88,7 +87,7 @@ hyperparam = {
 
 # Hyperparamer 값 CSV 파일로 저장
 
-hyper_df = pd.DataFrame(hyperparam).to_csv(f"{data_dir}hyperparameter.csv")
+hyper_df = pd.DataFrame(hyperparam).to_csv(f"{data_dir}/hyperparameter.csv")
 print(hyper_df)
 
 
