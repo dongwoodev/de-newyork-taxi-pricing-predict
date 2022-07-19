@@ -80,4 +80,4 @@ predictions.cache()
 predictions.select(['trip_distance', 'day_of_week', 'total_amount', 'prediction']).show()
 
 model_dir = f"{data_dir}/model"
-model.write().overwrite().save(model_dir)
+model.write().overwrite().save(model_dir) # 모델 정보 저장

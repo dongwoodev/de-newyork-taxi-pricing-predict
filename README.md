@@ -87,6 +87,14 @@
 
 - 10마일 정도 가는데 41불 정도로 예측되었고 거리가 길수록 예측 확률도 높아진다는 것을 알 수 있었다. (초기 예측)
 - 전처리 이후, 좋은 성능이 나온 것으로 확인되었다.
+
+## Batch Data Pipeline 구축
+택시비 예측을 위해 `Airflow`를 이용하여 파이프라인을 구축한다. 
+```
+preprocess >> tune_hyperparameter >> train_predict
+```
+
+
 ## 성능 개선
 - 데이터 클리닝 도중, `total_amount` 와 `trip_distance`등 에서 이상값(Outlier)를 발견
     > 해결 : `WHERE` 을 통해 새 쿼리를 만들어 데이터 전처리
