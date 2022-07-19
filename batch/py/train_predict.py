@@ -1,26 +1,21 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 from pyspark.sql import SparkSession
-
-
-# In[2]:
-
+from pyspark.ml import Pipeline
+from pyspark.ml.feature import OneHotEncoder, StringIndexer, VectorAssembler, StandardScaler # Preprocessing
+from pyspark.ml.regression import LinearRegression 
+from pyspark.ml.tuning import CrossValidator, ParamGridBuilder # CV, Grid
+from pyspark.ml.evaluation import RegressionEvaluator 
+import numpy as np
+import pandas as pd
 
 MAX_MEMORY = '5g'
-spark = SparkSession.builder.appName('taxi-fare-prediction')                    .config('spark.executor.memory', MAX_MEMORY)                    .config('spark.driver.memory', MAX_MEMORY)                    .getOrCreate()
+spark = SparkSession.builder.appName('taxi-fare-prediction')\
+                .config('spark.executor.memory', MAX_MEMORY)\
+                .config('spark.driver.memory', MAX_MEMORY)\
+                .getOrCreate()
 
-
-# # 데이터프레임 생성
-
-# In[3]:
-
-
-trip_files = '/Users/dongwoo/new_york/data/trips/*' # 모든 파일을 가져온다.
-zone_file = '/Users/dongwoo/new_york/data/taxi+_zone_lookup.csv' 
+data_dir = "/Users/dongwoo/new_york/data"
+train_df = spark.read.parquet(f"{data_dir}/train/")
+test_df = spark.read.parquet(f"{data_dir}/test/")
 
 
 # In[4]:
