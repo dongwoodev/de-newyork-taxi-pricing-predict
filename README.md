@@ -108,3 +108,6 @@ preprocess >> tune_hyperparameter >> train_predict
     ```
     > 해결 : 위 코드를 입력하여 재 실행!
 
+---
+# 3. Stream Process
+- 택시 Trips 데이터를 통해 Price 예측하는 과정이다.
