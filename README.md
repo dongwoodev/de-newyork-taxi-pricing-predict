@@ -102,4 +102,9 @@ preprocess >> tune_hyperparameter >> train_predict
 - `OneHoTEncoding`과 `StandardScaler`, `VectorAssembler`를 통해 numerical Data와 Categorical data를 전처리 한 컬럼을 이용해 예측 성능을 내보았다.
     > 해결 : 지난 초기 예측 성능 보다 10% 향상된 좋은 성능이 나왔다. (80%)
     > 해결2 : 파라미터 튜닝을 진행하였지만 차이가 없는 같은 성능이 나왔다.
+- Airflow와 Local Python의 환경이 맞지 않아 생기는 문제 발생
+    ```
+    airflow.exceptions.AirflowException: Cannot execute: spark-submit --master yarn --name arrow-spark /Users/dongwoo/new_york/batch/py/preprocess.py. Error code is: 1.
+    ```
+    > 해결 : 위 코드를 입력하여 재 실행!
 
