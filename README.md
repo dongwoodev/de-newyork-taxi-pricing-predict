@@ -110,6 +110,8 @@ preprocess >> tune_hyperparameter >> train_predict
 
 ---
 # 3. Stream Process
+
+<img src="./templates/kafka_sink.png" width="500">
 ## 택시 Trips 데이터를 보낼 Producer 만들기
 - 택시 Trips 데이터를 통해 Price 예측하는 과정이다.
 
@@ -120,12 +122,27 @@ preprocess >> tune_hyperparameter >> train_predict
 
 - `docker-compose up`으로 kafka 클러스터를 만든다.
 
-- [LocalHost][http://localhost:9000]링크를 통해 KafDrop이 열리는 것을 확인하였다.
+- [LocalHost](http://localhost:9000)링크를 통해 KafDrop이 열리는 것을 확인하였다.
     - `taxi-trips` 라는 토픽을 생성합니다.
 
-- producer 파일을 이용해서 데이터를 보내줍니다.
+- producer 파일을 이용해서 데이터를 보내준다.
 
 ## Flink를 통해 택시 정보를 받아오기
+- 데이터를 받을 Kafka Consumer는 내장되어 있지 않기 때문에  오류 발생을 막기 위해 `kafka connector`를 다운 받는다.
+
+```py
+kafka_jar_path = os.path.join(
+  os.path.abspath(os.path.dirname(__file__)), "../",
+  "flink-sql-connector-kafka_2.11-1.14.0.jar"
+)
+t_env.get_config().get_configuration().set_string(
+  "pipeline.jars", f"file://{kafka_jar_path}"
+)
+```
+
+
+
+- 
 
 ## 성능 개선 
 - `Error Starting userland proxy: listem tcp 0.0.0.0:XXXX: bind: address already in ~` 으로 포트가 겹쳐서 에러가 발생했다.
@@ -135,3 +152,4 @@ preprocess >> tune_hyperparameter >> train_predict
 - `UnicodeDecodeError: 'utf-8' codec can't decode byte 0x8b in position 19: invalid start byte`
     - `parquet` 파일을 인코딩했을 때, read한 로우 값이 제대로 인코딩 되지 않았다.
     - `cp949`를 사용했지만 변화가 없자 parquet to csv를 했다.
+    - [참고링크](https://blog.naver.com/PostView.nhn?blogId=koys007&logNo=221850810999)
