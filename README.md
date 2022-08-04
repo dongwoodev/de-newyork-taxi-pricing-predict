@@ -110,4 +110,28 @@ preprocess >> tune_hyperparameter >> train_predict
 
 ---
 # 3. Stream Process
+## 택시 Trips 데이터를 보낼 Producer 만들기
 - 택시 Trips 데이터를 통해 Price 예측하는 과정이다.
+
+- compose 파일을 만듭니다.
+    - zookeeper
+    - kafka
+    - kafdrop
+
+- `docker-compose up`으로 kafka 클러스터를 만든다.
+
+- [LocalHost][http://localhost:9000]링크를 통해 KafDrop이 열리는 것을 확인하였다.
+    - `taxi-trips` 라는 토픽을 생성합니다.
+
+- producer 파일을 이용해서 데이터를 보내줍니다.
+
+## Flink를 통해 택시 정보를 받아오기
+
+## 성능 개선 
+- `Error Starting userland proxy: listem tcp 0.0.0.0:XXXX: bind: address already in ~` 으로 포트가 겹쳐서 에러가 발생했다.
+    > 해결 :  `netstat` 으로 포트를 확인한 후 이미 사용중인 상태라면 `docker-compose down docker rm -fv` 로 컨테이너를 제거했다.
+    > - `kill -9 PID`로 포트를 제거할 수 있다. 
+
+- `UnicodeDecodeError: 'utf-8' codec can't decode byte 0x8b in position 19: invalid start byte`
+    - `parquet` 파일을 인코딩했을 때, read한 로우 값이 제대로 인코딩 되지 않았다.
+    - `cp949`를 사용했지만 변화가 없자 parquet to csv를 했다.
