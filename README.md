@@ -7,6 +7,10 @@
 
 - 대용량 데이터의 아키텍쳐 설계와 파이프라인 구축을 위해 택시 요금을 예측한다.
 
+### [🔗 Batch Processing](https://github.com/dustin-kang/newyork-taxi-pricing-predict/tree/main/batch)
+ 
+### [🔗 Stream Processing](https://github.com/dustin-kang/newyork-taxi-pricing-predict/tree/main/stream)
+
 ## File Tree
 ```py
 ├── README.md
@@ -49,12 +53,11 @@
 
 
 ## Execute Plan
-|No.|Title|Decription|Stack|URL|
-|---|---|---|---|---|
-|1|New York Taxi Data Analysis (뉴욕 택시 데이터 분석)|뉴욕 택시 데이터 분석을 진행|`spark SQL`, `jupyter Notebook`|[🔗]()|
-|2|Taxi Pricing Prediction (택시비  예측)|택시비 예측 후 파라미터 최적화 및 모델 저장|`spark ML`, `jupyter Notebook`|[🔗]()|
-|3|Taxi Pricing PipeLine (택시비 예측 파이프라인 관리) |Airflow를 통해 택시비에 대한 파이프라인을 구축및 관리|`Airflow`, `Spark`|[🔗]()|
-|4|Taxi Pricing Event Processing (택시비 이벤트 처리) |카프카를 이용하여 택시 Producer, Topic을 만들고 메세지 확인할 수 있게 구현|`Kafka`, `Spark`|[🔗]()|
-|5|Taxi Pricing (택시정보 받아 택시비 예측) |Flink를 이용하여 택시 정보를 받아 택시비 예측|`Flink`, `Spark`|[🔗]()|
-    
+|No.|Title|Decription|Stack|
+|---|---|---|---|
+|1|New York Taxi Data Analysis (뉴욕 택시 데이터 분석)|뉴욕 택시 데이터 분석을 진행|`spark SQL`, `jupyter Notebook`|
+|2|Taxi Pricing Prediction (택시비  예측)|택시비 예측 후 파라미터 최적화 및 모델 저장|`spark ML`, `jupyter Notebook`|
+|3|Taxi Pricing PipeLine (택시비 예측 파이프라인 관리) |Airflow를 통해 택시비에 대한 파이프라인을 구축및 관리|`Airflow`, `Spark`|
+|4|Taxi Pricing Event Processing (택시비 이벤트 처리) |카프카를 이용하여 택시 Producer, Topic을 만들고 메세지 확인할 수 있게 구현|`Kafka`, `Spark`|
+|5|Taxi Pricing (택시정보 받아 택시비 예측) |Flink를 이용하여 택시 정보를 받아 택시비 예측|`Flink`, `Spark`|
 
