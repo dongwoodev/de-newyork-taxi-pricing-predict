@@ -24,9 +24,9 @@
 ## 2. 머신러닝 예측
 |No|r2 score|RMSE|Description|Link|
 |---|---|---|---|---|
-|1|0.70|7.91|초기 예측 모델|[💾](./batch/notebook/taxi-analysis.ipynb)|
-|2|0.81|6.2|OneHot Encoding, Standard Scaling, Vector Assembler등 전처리|[💾](./batch/notebook/taxi-fare-prediction-preprocessing.ipynb)|
-|3|0.81|6.2|Parameter Tuning (elesticNet, Regression)|[💾](./batch/notebook/taxi-fare-prediction-hyper-parameter.ipynb)|
+|1|0.70|7.91|초기 예측 모델|[💾](https://github.com/dustin-kang/newyork-taxi-pricing-predict/blob/main/batch/notebook/taxi-fare-prediction.ipynb)|
+|2|0.81|6.2|OneHot Encoding, Standard Scaling, Vector Assembler등 전처리|[💾](https://github.com/dustin-kang/newyork-taxi-pricing-predict/blob/main/batch/notebook/taxi-fare-prediction-preprocessing.ipynb)|
+|3|0.81|6.2|Parameter Tuning (elesticNet, Regression)|[💾](https://github.com/dustin-kang/newyork-taxi-pricing-predict/blob/main/batch/notebook/taxi-fare-prediction-hyper-parameter.ipynb)|
 
 - 10마일 정도 가는데 41불 정도로 예측되었고 거리가 길수록 예측 확률도 높아진다는 것을 알 수 있었다. (초기 예측)
 - 전처리 이후, 좋은 성능이 나온 것으로 확인되었다.
