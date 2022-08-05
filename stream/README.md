@@ -3,6 +3,7 @@
 <img src="https://img.shields.io/badge/Kafka-231F20?style=for-the-badge&logo=Apache kafka&logoColor=white">
 <img src="https://img.shields.io/badge/Flink-E6526F?style=for-the-badge&logo=Apache Flink&logoColor=white">
 <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
+
 ```
 1. Compose up 하여 kafka 클러스터를 만든후 토픽 생성  이후 Producer 동작 확인
 2. Sourece 테이블에서 Sink 테이블로 옮기는 작업
@@ -10,9 +11,11 @@
     - UDF 함수를 생성하여 Source Table 데이터를 Sink Table로 머신러닝을 통해 택시비 예측 값 전달
 ```
 
-<img src="../templates/kafka_sink.png" width="600">
+
 
 ## 1. 택시 Trips 데이터를 보낼 Producer 만들기
+
+<img src="../templates/kafka_sink.png" width="600">
 1. 택시 Trips 데이터를 통해 Price 예측하는 과정이다.
 
 2. compose 파일을 만듭니다.
