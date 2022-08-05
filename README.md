@@ -8,12 +8,12 @@
 - 대용량 데이터의 아키텍쳐 설계와 파이프라인 구축을 위해 택시 요금을 예측한다.
 
 ## 파일 트리
-```
+```py
 ├── README.md
 ├── batch
 │   ├── notebook
-│   │   ├── taxi-analysis.ipynb
-│   │   ├── taxi-fare-prediction-hyper-parameter.ipynb
+│   │   ├── taxi-analysis.ipynb # 택시비용 Spark-Sql 분석
+│   │   ├── taxi-fare-prediction-hyper-parameter.ipynb # 택시 비용 하이퍼 파리머터 예측
 │   │   ├── taxi-fare-prediction-preprocessing.ipynb
 │   │   └── taxi-fare-prediction.ipynb
 │   └── py
@@ -28,6 +28,13 @@
 │   ├── train
 │   └── trips
 ├── stream
+│   ├── data  # Kafka Data
+│   ├── docker-compose.yml
+│   ├── flink_taxi_pricing
+│   ├── model.pkl
+│   ├── producer.py
+│   ├── training_batch.py
+│   └── flink-sql-connector-kafka_2.11-1.14.0.jar
 └── templates
     ├── readme_pipeline.png
     ├── 날짜별_택시_이용_시각화.png
@@ -111,24 +118,25 @@ preprocess >> tune_hyperparameter >> train_predict
 ---
 # 3. Stream Process
 
-<img src="./templates/kafka_sink.png" width="500">
-## 택시 Trips 데이터를 보낼 Producer 만들기
-- 택시 Trips 데이터를 통해 Price 예측하는 과정이다.
+<img src="./templates/kafka_sink.png" width="600">
 
-- compose 파일을 만듭니다.
+## 택시 Trips 데이터를 보낼 Producer 만들기
+1. 택시 Trips 데이터를 통해 Price 예측하는 과정이다.
+
+2. compose 파일을 만듭니다.
     - zookeeper
     - kafka
     - kafdrop
 
-- `docker-compose up`으로 kafka 클러스터를 만든다.
+3. `docker-compose up`으로 kafka 클러스터를 만든다.
 
-- [LocalHost](http://localhost:9000)링크를 통해 KafDrop이 열리는 것을 확인하였다.
+4. [LocalHost](http://localhost:9000)링크를 통해 KafDrop이 열리는 것을 확인하였다.
     - `taxi-trips` 라는 토픽을 생성합니다.
 
-- producer 파일을 이용해서 데이터를 보내준다.
+5. producer 파일을 이용해서 데이터를 보내준다.
 
 ## Flink를 통해 택시 정보를 받아오기
-- 데이터를 받을 Kafka Consumer는 내장되어 있지 않기 때문에  오류 발생을 막기 위해 `kafka connector`를 다운 받는다.
+1. 데이터를 받을 Kafka Consumer는 내장되어 있지 않기 때문에  오류 발생을 막기 위해 `kafka connector`를 다운 받는다.
 
 ```py
 kafka_jar_path = os.path.join(
@@ -139,10 +147,16 @@ t_env.get_config().get_configuration().set_string(
   "pipeline.jars", f"file://{kafka_jar_path}"
 )
 ```
+2. Flink을 이용하여 Stream 환경으로  SourceTable을 Sink Table로 보낸다.
+    - `pip install apache-flink`
+    - `pip install flink`
 
+3. `training_batch`로 머신러닝 예측 모델 파일을 만든다.
 
+4. `udf` 함수를 정의하여  pickup_ts(픽업시간)), trip_distance(거리), trip_hour(시간:Hour) 를 이용하여 모델링한 파일로 Flink를 통해 받아온 택시 정보의 택시 비용을 예측한다.
 
-- 
+<img src="./templates/batch_training.png" width="600">
+
 
 ## 성능 개선 
 - `Error Starting userland proxy: listem tcp 0.0.0.0:XXXX: bind: address already in ~` 으로 포트가 겹쳐서 에러가 발생했다.
@@ -153,3 +167,5 @@ t_env.get_config().get_configuration().set_string(
     - `parquet` 파일을 인코딩했을 때, read한 로우 값이 제대로 인코딩 되지 않았다.
     - `cp949`를 사용했지만 변화가 없자 parquet to csv를 했다.
     - [참고링크](https://blog.naver.com/PostView.nhn?blogId=koys007&logNo=221850810999)
+    
+

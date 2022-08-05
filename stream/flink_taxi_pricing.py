@@ -60,7 +60,10 @@ source_query = """
 
 sink_query = """
   CREATE TABLE sink (
-    tpep_pickup_datetime STRING
+    pickup_ts TIMESTAMP(3),
+    trip_distance DOUBLE,
+    trip_hour INT,
+    expected_price DOUBLE
   ) WITH (
     'connector' = 'print'
   )
@@ -77,14 +80,16 @@ t_env.execute_sql(sink_query)
   DataTypes.FIELD("trip_hour", DataTypes.INT()),
   DataTypes.FIELD("expected_price", DataTypes.DOUBLE()),
 ]))
+
+
 def calc_price(row):
   import pickle 
   import pandas as pd 
   with open("./model.pkl", "rb") as f:
-    lr = pickle.load(f)
+    lr = pickle.load(f) # 모델을 가져옴
     pickup_ts, trip_distance = row
     trip_hour = pickup_ts.hour
-    df = pd.DataFrame([[trip_hour, trip_distance]], columns=['trip_hour', "trip_distance"])
+    df = pd.DataFrame([[trip_hour, trip_distance]], columns=['trip_hour', "trip_distance"]) # 모델에 들어갈 DF
     prediction = lr.predict(df)
     return Row(pickup_ts, trip_distance, trip_hour, prediction[0])
 
@@ -92,5 +97,5 @@ def calc_price(row):
 ## Trips -> Sink Table ##
 trips = t_env.from_path("trips")
 trips = trips.select("tpep_pickup_datetime")
-# trips = trips.map(calc_price).alias("prickup_ts", "trip_distance", "trip_hour", "expected_price")
+trips = trips.map(calc_price).alias("prickup_ts", "trip_distance", "trip_hour", "expected_price")
 trips.execute_insert("sink").wait()
