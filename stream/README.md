@@ -1,8 +1,5 @@
 # Stream Process
-<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white">
-<img src="https://img.shields.io/badge/Kafka-231F20?style=for-the-badge&logo=Apache kafka&logoColor=white">
-<img src="https://img.shields.io/badge/Flink-E6526F?style=for-the-badge&logo=Apache Flink&logoColor=white">
-<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"> <img src="https://img.shields.io/badge/Kafka-231F20?style=for-the-badge&logo=Apache kafka&logoColor=white"> <img src="https://img.shields.io/badge/Flink-E6526F?style=for-the-badge&logo=Apache Flink&logoColor=white"> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
 
 ```
 1. Compose up 하여 kafka 클러스터를 만든후 토픽 생성  이후 Producer 동작 확인
