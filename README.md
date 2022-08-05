@@ -11,7 +11,7 @@
  
 ### [🔗 Stream Processing](https://github.com/dustin-kang/newyork-taxi-pricing-predict/tree/main/stream)
 
-## File Tree
+# File Tree
 ```py
 ├── README.md
 ├── batch
@@ -43,7 +43,7 @@
 └── templates # README 그림 자료
 ```
 
-## Pipeline
+# Pipeline
 <img src="./templates/readme_pipeline.png" width="800">
 
 1. **배치 프로세싱(기존 데이터 기반)**
@@ -52,7 +52,7 @@
     - 택시 요금, 이동 시간은 실시간으로 예측을 진행한다.
 
 
-## Execute Plan
+# Execute Plan
 |No.|Title|Decription|Stack|
 |---|---|---|---|
 |1|New York Taxi Data Analysis (뉴욕 택시 데이터 분석)|뉴욕 택시 데이터 분석을 진행|`spark SQL`, `jupyter Notebook`|
