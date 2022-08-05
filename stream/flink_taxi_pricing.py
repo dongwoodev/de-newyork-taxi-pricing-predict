@@ -90,7 +90,7 @@ def calc_price(row):
     pickup_ts, trip_distance = row
     trip_hour = pickup_ts.hour
     df = pd.DataFrame([[trip_hour, trip_distance]], columns=['trip_hour', "trip_distance"]) # 모델에 들어갈 DF
-    prediction = lr.predict(df)
+    prediction = lr.predict(df) # df의 예측값
     return Row(pickup_ts, trip_distance, trip_hour, prediction[0])
 
 
